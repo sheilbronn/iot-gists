@@ -28,16 +28,16 @@ import ssd1306
 oled = ssd1306.SSD1306_I2C(128, 64, i2c)  # ... or use "1-0-1" reset code on pin 21 above
 oled.fill(0)
 oled.text(" FREQ: " + str(freq()/1000000) + " MHz", 0, 0)
-oled.text("     SOME     ", 0, 32)
-oled.text("  MORE LINES ", 0, 40)
-oled.text("    ON THE    ", 0, 48)
-oled.text("    SCREEN    ", 0, 56)
+oled.text("     SOME     ", 0, 24)
+oled.text("  MORE LINES ", 0, 32)
+oled.text("    ON THE    ", 0, 40)
+oled.text("    SCREEN.   ", 0, 48)
 #oled.fill(1)
 
 oled.show()
 sleep(1)
 #oled.poweroff()     # power off the display, pixels persist in memory
-oled.text("    INDEED    ", 0, 24)
+oled.text("    INDEED    ", 0, 16)
 oled.show()
 
 sleep(1)
@@ -50,4 +50,5 @@ oled.invert(1)      # display inverted
 # oled.invert(0)      # display normal
 # oled.rotate(True)   # rotate 180 degrees
 # oled.rotate(False)  # rotate 0 degrees
+oled.text("     DONE.    ", 0, 56)
 oled.show()
