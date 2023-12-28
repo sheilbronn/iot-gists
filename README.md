@@ -1,6 +1,6 @@
 # iot-gists
 
-Little pieces of code related to IoT programming on ESP32 etc
+Little pieces of code and information related to IoT programming on ESP32, OpenWrt etc.
 
 ## Heltec Lora Wifi 32 V3 (not V2!)
 
@@ -19,8 +19,8 @@ Code for the Heltec Lora Wifi 32 V3 (not V2!)
 
 ### rpi-clone compatible with Debian Bookworm
 
-The original [rpi-clone from billw](https://github.com/billw2/rpi-clone) probably doesn't work with bookworm.  
-However, for me, a patched version of [rpi-clone from framps](https://github.com/framps/rpi-clone) did the job!
+The original [rpi-clone from billw](https://github.com/billw2/rpi-clone) probably doesn't work with the newer Debian bookworm, since it hasn't been upgraded for yours and cannot cope with the new firmware location.  
+However, for me, the *patched version* of [rpi-clone from framps](https://github.com/framps/rpi-clone) did the job!
 
 ### Upgrading from buster to bookworm
 
@@ -28,3 +28,20 @@ Upgrading a Raspberry Pi from buster to bookworm is currently NOT recommended (a
 If you want to try it anyway, here is a [HOWTO: Upgrade Raspberry Pi OS from Bullseye to Bookworm](<https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8>).  
 
 But be sure to clone (backup) your installation BEFORE upgrading - cloning my Buster Openhab installation with rpi-clone (see above, either version) did the job! Make sure the clone you created is bootable before proceeding!
+
+## AVM Fritzbox 7362SL with OpenWrt/Gluon/Freifunk
+
+### Links & Howtos
+
+1. [OpenWrt Techdata on 7362SL](https://openwrt.org/toh/avm/avm_7362_sl) incl. flashing instructions and recovery information
+2. German [flashing instructions wrt to Gluon](https://forum.ffrn.de/t/flashen-der-fritz-box-7362-sl/3490).
+3. Besides enabling remote SSH access on all interfaces (default), one has to explicitly provide a [firewall rule for incoming SSH connections on OpenWrt 12.09](https://blog.differentpla.net/blog/2015/05/27/openwrt-ssh-wan/) from the WAN interface. (Instructions are for an older OpenWRT version but work similar on 23.05). Or, add the following section to ``/etc/config/firewall`` using an editor and then run ``/etc/init.d/firewall restart``:
+
+```console
+config rule
+        option name 'Allow-SSH-WAN'
+        list proto 'tcp'
+        option src 'wan'
+        option dest_port '22'
+        option target 'ACCEPT'
+```
